@@ -45,6 +45,27 @@ describe('application logic', () => {
       }));
     });
 
+    it('puts winner of current vote back to entries', () => {
+      const state = fromJS({
+        entries: ['Sunshine', 'Millions', '127 hours'],
+        vote: {
+          pair: ['Trainspotting', '28 days later'],
+          tally: {
+            'Trainspotting': 3,
+            '28 days later': 2
+          }
+        }
+      });
+      const nextState = next(state);
+
+      expect(nextState).to.equal(Map({
+        entries: List.of('127 hours', 'Trainspotting'),
+        vote: Map({
+          pair: List.of('Sunshine', 'Millions')
+        })
+      }));
+    });
+
   });
 
   describe('vote', () => {
