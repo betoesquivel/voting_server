@@ -136,6 +136,24 @@ describe('application logic', () => {
       }));
     });
 
+    it('selects a winner when there are no more entries left', () => {
+      const state = fromJS({
+        entries: [],
+        vote: {
+          pair: ['Trainspotting', '28 days later'],
+          tally: {
+            'Trainspotting': 3,
+            '28 days later': 2
+          }
+        }
+      });
+      const nextState = next(state);
+
+      expect(nextState).to.equal(fromJS({
+        winner: 'Trainspotting'
+      }));
+    });
+
   });
 
 });
