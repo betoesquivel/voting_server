@@ -98,8 +98,7 @@ describe('application logic', () => {
           pair: ['Trainspotting', '28 days later']
         }
       });
-      const nextState = vote(state, 'Trainspotting');
-
+      const nextState = state.update('vote', voteState => vote(voteState, 'Trainspotting'));
       expect(nextState).to.equal(Map({
         entries: List.of('Sunshine'),
         vote: Map({
@@ -122,7 +121,7 @@ describe('application logic', () => {
           }
         }
       });
-      const nextState = vote(state, 'Trainspotting');
+      const nextState = state.update('vote', voteState => vote(voteState, 'Trainspotting'));
 
       expect(nextState).to.equal(Map({
         entries: List.of('Sunshine'),
